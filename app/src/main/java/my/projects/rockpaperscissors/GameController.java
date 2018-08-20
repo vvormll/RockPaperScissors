@@ -1,9 +1,12 @@
 package my.projects.rockpaperscissors;
 
+import java.util.List;
+
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.logic.game.PlayerInputProcessor;
 import my.projects.rockpaperscissors.logic.game.VictoryConditionChecker;
+import my.projects.rockpaperscissors.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.logic.rules.RuleSetBuilder;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 import my.projects.rockpaperscissors.logic.symbol.SymbolPicker;
@@ -15,10 +18,12 @@ public class GameController {
     private SymbolPicker symbolPicker;
     private StrategyPicker strategyPicker;
     private VictoryConditionChecker victoryConditionChecker;
+    private RuleSet ruleSet;
 
     public GameController() {
         gameInfo = new GameInfo();
-        victoryConditionChecker = new VictoryConditionChecker(RuleSetBuilder.buildRockPaperScissorsRuleSet());
+        ruleSet = RuleSetBuilder.buildRockPaperScissorsRuleSet();
+        victoryConditionChecker = new VictoryConditionChecker(ruleSet);
         strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker();
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
     }
@@ -50,6 +55,10 @@ public class GameController {
         if (symbolPicker.shouldChangeStrategy()) {
             symbolPicker.changeStrategy(strategyPicker.pickNextStrategy(symbolPicker.getStrategy()));
         }
+    }
+
+    public List<Symbol> getSymbols() {
+        return ruleSet.getSymbols();
     }
 
 }

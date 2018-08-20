@@ -2,6 +2,8 @@ package my.projects.rockpaperscissors.logic.rules;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import my.projects.rockpaperscissors.logic.CircularIteratorBuilder;
@@ -37,6 +39,11 @@ public class CircularRuleSet implements RuleSet {
         }
 
         return SymbolComparisonResult.UNDEFINED;
+    }
+
+    @Override
+    public List<Symbol> getSymbols() {
+        return new LinkedList<>(symbolSet);
     }
 
     public void addSymbolToEnd(Symbol symbol) {

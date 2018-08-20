@@ -3,8 +3,13 @@ package my.projects.rockpaperscissors;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
@@ -20,6 +25,9 @@ public class GameActivity extends Activity implements GameView {
     private TextView computerActionTextView;
     private TextView stateTextView;
 
+    private HorizontalScrollView buttonsScrollView;
+    private LinearLayout buttonsLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,34 +39,13 @@ public class GameActivity extends Activity implements GameView {
             gamePresenter.onRestoreState((GameInfo) savedInstanceState.getSerializable(GAME_INFO_KEY));
         }
 
+        buttonsScrollView = findViewById(R.id.buttonsScrollView);
+        buttonsLinearLayout = findViewById(R.id.buttonLinearLayout);
+
         playerScoreTextView = findViewById(R.id.playerScoreTextView);
         computerScoreTextView = findViewById(R.id.computerScoreTextView);
         computerActionTextView = findViewById(R.id.computerActionTextView);
         stateTextView = findViewById(R.id.stateTextView);
-
-        Button rockButton = findViewById(R.id.rockButton);
-        rockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gamePresenter.onPickedSymbol(Symbol.ROCK);
-            }
-        });
-
-        Button paperButton = findViewById(R.id.scissorsButton);
-        paperButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gamePresenter.onPickedSymbol(Symbol.PAPER);
-            }
-        });
-
-        Button scissorsButton = findViewById(R.id.paperButton);
-        scissorsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gamePresenter.onPickedSymbol(Symbol.SCISSORS);
-            }
-        });
     }
 
     @Override
@@ -67,6 +54,31 @@ public class GameActivity extends Activity implements GameView {
         computerScoreTextView.setText(getString(R.string.computer_score, computerScore));
         stateTextView.setText(gameOutcome);
         computerActionTextView.setText(computerChoice);
+    }
+
+    @Override
+    public void initUI(List<String> symbolStrings) {
+        buttonsLinearLayout.removeAllViews();
+
+        int id = 0;
+        for (String symbolString : symbolStrings) {
+            final Button button = new Button(this);
+
+            button.setId(id);
+            button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            button.setText(symbolString);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    gamePresenter.onPickedSymbol(Symbol.valueOf(button.getText().toString()));
+                }
+            });
+
+            buttonsLinearLayout.addView(button);
+
+            id++;
+        }
     }
 
     @Override

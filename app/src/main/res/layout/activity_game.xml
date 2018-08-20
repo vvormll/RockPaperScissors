@@ -44,32 +44,23 @@
             android:text="@string/pick"
             android:textAllCaps="true" />
 
-        <LinearLayout
+        <HorizontalScrollView
+            android:id="@+id/buttonsScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
-            android:orientation="horizontal">
+            android:layout_weight="4">
 
-            <Button
-                android:id="@+id/rockButton"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/buttonLinearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/rock" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/paperButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/paper" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/scissorsButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/scissors" />
-        </LinearLayout>
+        </HorizontalScrollView>
+
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

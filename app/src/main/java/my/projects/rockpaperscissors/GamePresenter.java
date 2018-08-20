@@ -1,5 +1,8 @@
 package my.projects.rockpaperscissors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
@@ -36,6 +39,7 @@ public class GamePresenter {
             throw new IllegalStateException("View is not attached");
         }
 
+        initUIWithSymbols();
         updateUI(gameController.getGameInfo());
     }
 
@@ -50,6 +54,15 @@ public class GamePresenter {
 
     public void onQuitGame() {
         gameController.clearInfo();
+    }
+
+    private void initUIWithSymbols() {
+        List<Symbol> symbols = gameController.getSymbols();
+        List<String> symbolStrings = new ArrayList<>();
+        for (Symbol symbol : symbols) {
+            symbolStrings.add(symbol.name());
+        }
+        gameView.initUI(symbolStrings);
     }
 
     private void updateUI(GameInfo gameInfo) {
