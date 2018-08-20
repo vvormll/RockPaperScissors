@@ -11,8 +11,6 @@ import my.projects.rockpaperscissors.strategy.picker.StrategyPicker;
 import my.projects.rockpaperscissors.strategy.picker.StrategyPickerBuilder;
 
 public class GameController {
-    private GamePresenter gamePresenter;
-
     private GameInfo gameInfo;
     private SymbolPicker symbolPicker;
     private StrategyPicker strategyPicker;
@@ -32,10 +30,6 @@ public class GameController {
         this.symbolPicker = symbolPicker;
     }
 
-    public void setGamePresenter(GamePresenter gamePresenter) {
-        this.gamePresenter = gamePresenter;
-    }
-
     public GameInfo getGameInfo() {
         return gameInfo;
     }
@@ -44,27 +38,11 @@ public class GameController {
         this.gameInfo = gameInfo;
     }
 
-    public void onGameStarted() {
-        if (gamePresenter == null) {
-            throw new IllegalStateException("GamePresenter must be set first");
-        }
-        gamePresenter.updateUI(gameInfo);
-    }
-
-    public void onQuitInput() {
-        if (gamePresenter == null) {
-            throw new IllegalStateException("GamePresenter must be set first");
-        }
-
+    public void clearInfo() {
         gameInfo.clearScore();
-        gamePresenter = null;
     }
 
     public void onPlayerInput(Symbol playerChoice) {
-        if (gamePresenter == null) {
-            throw new IllegalStateException("GamePresenter must be set first");
-        }
-
         Symbol computerChoice = symbolPicker.pickSymbol(gameInfo);
         GameOutcome gameOutcome = victoryConditionChecker.checkOutcome(playerChoice, computerChoice);
         gameInfo.updateInfo(playerChoice, computerChoice, gameOutcome);
@@ -72,8 +50,6 @@ public class GameController {
         if (symbolPicker.shouldChangeStrategy()) {
             symbolPicker.changeStrategy(strategyPicker.pickNextStrategy(symbolPicker.getStrategy()));
         }
-
-        gamePresenter.updateUI(gameInfo);
     }
 
 }

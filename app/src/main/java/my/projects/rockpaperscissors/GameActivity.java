@@ -25,8 +25,7 @@ public class GameActivity extends Activity implements GameView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gamePresenter = new GamePresenter(this);
-        gamePresenter.setGameController(new GameController());
+        gamePresenter = new GamePresenter();
 
         if (savedInstanceState != null) {
             gamePresenter.onRestoreState((GameInfo) savedInstanceState.getSerializable(GAME_INFO_KEY));
@@ -68,6 +67,18 @@ public class GameActivity extends Activity implements GameView {
         computerScoreTextView.setText(getString(R.string.computer_score, computerScore));
         stateTextView.setText(gameOutcome);
         computerActionTextView.setText(computerChoice);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gamePresenter.onAttachView(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        gamePresenter.onDetachView();
     }
 
     @Override

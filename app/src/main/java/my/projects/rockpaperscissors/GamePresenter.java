@@ -8,13 +8,19 @@ public class GamePresenter {
     private GameController gameController;
     private GameView gameView;
 
-    public GamePresenter(GameView gameView) {
+    public GamePresenter() {
+        gameController = new GameController();
+    }
+
+    public void onAttachView(GameView gameView) {
+        if (this.gameView != null) {
+            throw new IllegalStateException("There already is an attached View");
+        }
         this.gameView = gameView;
     }
 
-    public void setGameController(GameController gameController) {
-        gameController.setGamePresenter(this);
-        this.gameController = gameController;
+    public void onDetachView() {
+        gameView = null;
     }
 
     public GameInfo getGameInfo() {
@@ -26,19 +32,27 @@ public class GamePresenter {
     }
 
     public void onStartedGame() {
-        gameController.onGameStarted();
+        if (gameView == null) {
+            throw new IllegalStateException("View is not attached");
+        }
+
+        updateUI(gameController.getGameInfo());
     }
 
     public void onPickedSymbol(Symbol symbol) {
+        if (gameView == null) {
+            throw new IllegalStateException("View is not attached");
+        }
+
         gameController.onPlayerInput(symbol);
+        updateUI(gameController.getGameInfo());
     }
 
     public void onQuitGame() {
-        gameController.onQuitInput();
-        gameController = null;
+        gameController.clearInfo();
     }
 
-    public void updateUI(GameInfo gameInfo) {
+    private void updateUI(GameInfo gameInfo) {
         int playerScore = gameInfo.getPlayerWins();
         int computerScore = gameInfo.getComputerWins();
         String gameOutcome = (gameInfo.getGameOutcome() == null) ? "Pick" : gameInfo.getGameOutcome().toString();
