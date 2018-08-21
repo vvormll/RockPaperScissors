@@ -9,9 +9,6 @@ public class CircularRPSRuleSetTest {
     @Test
     public void comparisonsAreCorrect() {
         CircularRPSRuleSet circularRPSRuleSet = new CircularRPSRuleSet();
-        circularRPSRuleSet.addSymbolToEnd(Symbol.ROCK);
-        circularRPSRuleSet.addSymbolToEnd(Symbol.PAPER);
-        circularRPSRuleSet.addSymbolToEnd(Symbol.SCISSORS);
 
         compare(circularRPSRuleSet, Symbol.ROCK, Symbol.PAPER);
         compare(circularRPSRuleSet, Symbol.PAPER, Symbol.ROCK);
