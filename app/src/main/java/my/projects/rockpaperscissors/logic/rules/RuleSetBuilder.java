@@ -5,7 +5,7 @@ import my.projects.rockpaperscissors.logic.symbol.Symbol;
 public class RuleSetBuilder {
 
     public static RuleSet buildRockPaperScissorsRuleSet() {
-        CircularRuleSet ruleSet = new CircularRuleSet();
+        CircularRPSRuleSet ruleSet = new CircularRPSRuleSet();
         ruleSet.addSymbolToEnd(Symbol.ROCK);
         ruleSet.addSymbolToEnd(Symbol.PAPER);
         ruleSet.addSymbolToEnd(Symbol.SCISSORS);

@@ -1,10 +1,8 @@
 package my.projects.rockpaperscissors.logic.game;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
-import my.projects.rockpaperscissors.logic.rules.CircularRuleSet;
 import my.projects.rockpaperscissors.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.logic.rules.SymbolComparisonResult;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
