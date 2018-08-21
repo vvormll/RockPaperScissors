@@ -4,28 +4,20 @@ import org.junit.Test;
 
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
+import static org.junit.Assert.assertEquals;
+
 public class CircularRPSRuleSetTest {
 
     @Test
     public void comparisonsAreCorrect() {
-        CircularRPSRuleSet circularRPSRuleSet = new CircularRPSRuleSet();
+        RuleSet rps = new CircularRPSRuleSet();
 
-        compare(circularRPSRuleSet, Symbol.ROCK, Symbol.PAPER);
-        compare(circularRPSRuleSet, Symbol.PAPER, Symbol.ROCK);
-        compare(circularRPSRuleSet, Symbol.PAPER, Symbol.SCISSORS);
-        compare(circularRPSRuleSet, Symbol.SCISSORS, Symbol.PAPER);
-        compare(circularRPSRuleSet, Symbol.ROCK, Symbol.SCISSORS);
-        compare(circularRPSRuleSet, Symbol.SCISSORS, Symbol.ROCK);
-        compare(circularRPSRuleSet, Symbol.ROCK, Symbol.ROCK);
-    }
-
-    private static void compare(CircularRPSRuleSet circularRPSRuleSet, Symbol symbol, Symbol other) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(symbol.name());
-        stringBuilder.append(" is ");
-        stringBuilder.append(circularRPSRuleSet.compareSymbols(symbol, other).name());
-        stringBuilder.append(" than ");
-        stringBuilder.append(other.name());
-        System.out.println(stringBuilder.toString());
+        assertEquals(SymbolComparisonResult.BIGGER, rps.compareSymbols(Symbol.PAPER, Symbol.ROCK));
+        assertEquals(SymbolComparisonResult.SMALLER, rps.compareSymbols(Symbol.ROCK, Symbol.PAPER));
+        assertEquals(SymbolComparisonResult.BIGGER, rps.compareSymbols(Symbol.SCISSORS, Symbol.PAPER));
+        assertEquals(SymbolComparisonResult.SMALLER, rps.compareSymbols(Symbol.PAPER, Symbol.SCISSORS));
+        assertEquals(SymbolComparisonResult.BIGGER, rps.compareSymbols(Symbol.ROCK, Symbol.SCISSORS));
+        assertEquals(SymbolComparisonResult.SMALLER, rps.compareSymbols(Symbol.SCISSORS, Symbol.ROCK));
+        assertEquals(SymbolComparisonResult.EQUAL, rps.compareSymbols(Symbol.ROCK, Symbol.ROCK));
     }
 }
