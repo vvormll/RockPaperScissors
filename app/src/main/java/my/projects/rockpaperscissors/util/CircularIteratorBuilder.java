@@ -1,4 +1,4 @@
-package my.projects.rockpaperscissors.logic;
+package my.projects.rockpaperscissors.util;
 
 import java.util.Collection;
 import java.util.Iterator;

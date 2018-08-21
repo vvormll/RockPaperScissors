@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import my.projects.rockpaperscissors.util.CircularIteratorBuilder;
+
 import static org.junit.Assert.assertEquals;
 
 public class CircularIteratorBuilderTest {
