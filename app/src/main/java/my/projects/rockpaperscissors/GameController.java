@@ -4,10 +4,9 @@ import java.util.List;
 
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.game.GameOutcome;
-import my.projects.rockpaperscissors.logic.game.PlayerInputProcessor;
 import my.projects.rockpaperscissors.logic.game.VictoryConditionChecker;
+import my.projects.rockpaperscissors.logic.rules.CircularRPSRuleSet;
 import my.projects.rockpaperscissors.logic.rules.RuleSet;
-import my.projects.rockpaperscissors.logic.rules.RuleSetBuilder;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 import my.projects.rockpaperscissors.logic.symbol.SymbolPicker;
 import my.projects.rockpaperscissors.strategy.picker.StrategyPicker;
@@ -22,7 +21,7 @@ public class GameController {
 
     public GameController() {
         gameInfo = new GameInfo();
-        ruleSet = RuleSetBuilder.buildRockPaperScissorsRuleSet();
+        ruleSet = new CircularRPSRuleSet();
         victoryConditionChecker = new VictoryConditionChecker(ruleSet);
         strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker();
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));

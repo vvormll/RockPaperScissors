@@ -10,7 +10,7 @@ public class RuleSetBuilderTest {
 
     @Test
     public void buildDefaultRPSRuleSet() {
-        RuleSet rps = RuleSetBuilder.buildRockPaperScissorsRuleSet();
+        RuleSet rps = new CircularRPSRuleSet();
 
         assertEquals(SymbolComparisonResult.BIGGER, rps.compareSymbols(Symbol.PAPER, Symbol.ROCK));
         assertEquals(SymbolComparisonResult.SMALLER, rps.compareSymbols(Symbol.ROCK, Symbol.PAPER));
