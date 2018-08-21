@@ -6,6 +6,7 @@ import java.util.List;
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.rules.CircularRPSRuleSet;
 import my.projects.rockpaperscissors.logic.rules.MapRPSLSRuleSet;
+import my.projects.rockpaperscissors.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 import my.projects.rockpaperscissors.strategy.picker.RandomSymbolStrategyOnlyStrategyPicker;
 import my.projects.rockpaperscissors.strategy.picker.StrategyPickerBuilder;
@@ -20,12 +21,15 @@ public class GamePresenter {
     }
 
     public GamePresenter(GameMode gameMode) {
+        RuleSet ruleSet;
         switch (gameMode) {
             case ROCK_PAPER_SCISSORS:
-                gameController = new GameController(new CircularRPSRuleSet(), StrategyPickerBuilder.buildDefaultCircularStrategyPicker());
+                ruleSet = new CircularRPSRuleSet();
+                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet));
                 break;
             case ROCK_PAPER_SCISSORS_LIZARD_SPOCK:
-                gameController = new GameController(new MapRPSLSRuleSet(), new RandomSymbolStrategyOnlyStrategyPicker());
+                ruleSet = new MapRPSLSRuleSet();
+                gameController = new GameController(ruleSet, new RandomSymbolStrategyOnlyStrategyPicker(ruleSet));
                 break;
             default:
                 gameController = new GameController();

@@ -23,7 +23,7 @@ public class GameController {
         gameInfo = new GameInfo();
         ruleSet = new CircularRPSRuleSet();
         victoryConditionChecker = new VictoryConditionChecker(ruleSet);
-        strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker();
+        strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet);
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
     }
 

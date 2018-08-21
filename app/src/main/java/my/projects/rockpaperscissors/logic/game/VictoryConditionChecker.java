@@ -24,8 +24,7 @@ public class VictoryConditionChecker {
                 return GameOutcome.PLAYER_LOSS;
             case UNDEFINED:
             default:
-                throw new IllegalStateException("Can't compare symbols: combination is not defined in the rule set");
+                throw new IllegalStateException("Can't compare symbols: combination is not defined in the rule set (" + playerChoice.name() + ", " + computerChoice.name() + ")");
         }
     }
-
 }

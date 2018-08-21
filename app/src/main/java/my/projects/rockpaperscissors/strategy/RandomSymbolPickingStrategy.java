@@ -1,11 +1,16 @@
 package my.projects.rockpaperscissors.strategy;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
 public class RandomSymbolPickingStrategy implements SymbolPickingStrategy {
+
+    private List<Symbol> symbolList = new ArrayList<>();
 
     private int gameCount;
 
@@ -15,7 +20,8 @@ public class RandomSymbolPickingStrategy implements SymbolPickingStrategy {
 
     private int gameCountThreshold;
 
-    public RandomSymbolPickingStrategy() {
+    public RandomSymbolPickingStrategy(List<Symbol> symbolList) {
+        this.symbolList.addAll(symbolList);
         gameCountThreshold = 3;
     }
 
@@ -35,11 +41,11 @@ public class RandomSymbolPickingStrategy implements SymbolPickingStrategy {
 
     @Override
     public Symbol pickSymbol() {
-        int symbolsSize = Symbol.values().length;
+        int symbolsSize = symbolList.size();
 
         int choice = rnd.nextInt(symbolsSize);
 
-        return Symbol.values()[choice];
+        return symbolList.get(choice);
     }
 
     @Override

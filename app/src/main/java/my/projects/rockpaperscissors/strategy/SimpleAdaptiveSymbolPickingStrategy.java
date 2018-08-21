@@ -1,5 +1,7 @@
 package my.projects.rockpaperscissors.strategy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import my.projects.rockpaperscissors.info.GameInfo;
@@ -7,15 +9,16 @@ import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
 public class SimpleAdaptiveSymbolPickingStrategy implements SymbolPickingStrategy {
 
+    private List<Symbol> symbolList;
+
     private int consecutiveLosses;
-
-
     private int consecutiveLossesThreshold;
 
     private Random rnd = new Random();
     private Symbol nextSymbol;
 
-    public SimpleAdaptiveSymbolPickingStrategy() {
+    public SimpleAdaptiveSymbolPickingStrategy(List<Symbol> symbolList)  {
+        this.symbolList = new ArrayList<>(symbolList);
         consecutiveLossesThreshold = 2;
     }
 
@@ -71,11 +74,11 @@ public class SimpleAdaptiveSymbolPickingStrategy implements SymbolPickingStrateg
     }
 
     private Symbol pickRandomSymbol() {
-        int symbolsSize = Symbol.values().length;
+        int symbolsSize = symbolList.size();
 
         int choice = rnd.nextInt(symbolsSize);
 
-        return Symbol.values()[choice];
+        return symbolList.get(choice);
     }
 
     public int getConsecutiveLossesThreshold() {
