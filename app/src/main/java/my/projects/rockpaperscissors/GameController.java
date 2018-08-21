@@ -27,6 +27,14 @@ public class GameController {
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
     }
 
+    public GameController(RuleSet ruleSet, StrategyPicker strategyPicker) {
+        gameInfo = new GameInfo();
+        this.ruleSet = ruleSet;
+        victoryConditionChecker = new VictoryConditionChecker(ruleSet);
+        this.strategyPicker = strategyPicker;
+        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
+    }
+
     public GameController(GameInfo gameInfo, VictoryConditionChecker victoryConditionChecker, StrategyPicker strategyPicker, SymbolPicker symbolPicker) {
         this.gameInfo = gameInfo;
         this.victoryConditionChecker = victoryConditionChecker;

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.projects.rockpaperscissors.info.GameInfo;
+import my.projects.rockpaperscissors.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.logic.rules.MapRPSLSRuleSet;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
+import my.projects.rockpaperscissors.strategy.picker.RandomSymbolStrategyOnlyStrategyPicker;
+import my.projects.rockpaperscissors.strategy.picker.StrategyPickerBuilder;
 
 public class GamePresenter {
 
@@ -13,6 +17,19 @@ public class GamePresenter {
 
     public GamePresenter() {
         gameController = new GameController();
+    }
+
+    public GamePresenter(GameMode gameMode) {
+        switch (gameMode) {
+            case ROCK_PAPER_SCISSORS:
+                gameController = new GameController(new CircularRPSRuleSet(), StrategyPickerBuilder.buildDefaultCircularStrategyPicker());
+                break;
+            case ROCK_PAPER_SCISSORS_LIZARD_SPOCK:
+                gameController = new GameController(new MapRPSLSRuleSet(), new RandomSymbolStrategyOnlyStrategyPicker());
+                break;
+            default:
+                gameController = new GameController();
+        }
     }
 
     public void onAttachView(GameView gameView) {

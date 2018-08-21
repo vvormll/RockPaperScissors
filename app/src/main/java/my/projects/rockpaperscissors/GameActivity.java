@@ -1,6 +1,7 @@
 package my.projects.rockpaperscissors;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,9 @@ public class GameActivity extends Activity implements GameView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gamePresenter = new GamePresenter();
+        Intent intent = getIntent();
+        GameMode gameMode = (GameMode) intent.getSerializableExtra(PickGameModeActivity.GAME_MODE_KEY);
+        gamePresenter = new GamePresenter(gameMode);
 
         if (savedInstanceState != null) {
             gamePresenter.onRestoreState((GameInfo) savedInstanceState.getSerializable(GAME_INFO_KEY));
