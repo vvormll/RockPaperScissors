@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import my.projects.rockpaperscissors.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.strategy.RandomSymbolPickingStrategy;
 import my.projects.rockpaperscissors.strategy.SimpleAdaptiveSymbolPickingStrategy;
 import my.projects.rockpaperscissors.strategy.SymbolPickingStrategy;
@@ -15,9 +17,11 @@ public class CircularStrategyPickerTest {
 
     @Test
     public void circlesAroundStrategies() {
+        RuleSet ruleSet = new CircularRPSRuleSet();
+
         List<SymbolPickingStrategy> strategyList = new ArrayList<>();
-        strategyList.add(new RandomSymbolPickingStrategy());
-        strategyList.add(new SimpleAdaptiveSymbolPickingStrategy());
+        strategyList.add(new RandomSymbolPickingStrategy(ruleSet.getSymbols()));
+        strategyList.add(new SimpleAdaptiveSymbolPickingStrategy(ruleSet.getSymbols()));
 
         CircularStrategyPicker strategyPicker = new CircularStrategyPicker(strategyList);
 

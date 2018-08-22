@@ -25,11 +25,11 @@ public class GamePresenter {
         switch (gameMode) {
             case ROCK_PAPER_SCISSORS:
                 ruleSet = new CircularRPSRuleSet();
-                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet));
+                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols()));
                 break;
             case ROCK_PAPER_SCISSORS_LIZARD_SPOCK:
                 ruleSet = new MapRPSLSRuleSet();
-                gameController = new GameController(ruleSet, new RandomSymbolStrategyOnlyStrategyPicker(ruleSet));
+                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildRandomSymbolPickingStrategyOnlyStrategyPicker(ruleSet.getSymbols()));
                 break;
             default:
                 gameController = new GameController();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;

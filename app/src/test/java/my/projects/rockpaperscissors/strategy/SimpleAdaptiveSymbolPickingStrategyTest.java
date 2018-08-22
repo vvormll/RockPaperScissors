@@ -1,9 +1,12 @@
 package my.projects.rockpaperscissors.strategy;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import my.projects.rockpaperscissors.info.GameInfo;
 import my.projects.rockpaperscissors.logic.game.GameOutcome;
+import my.projects.rockpaperscissors.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
 import static org.junit.Assert.assertEquals;
@@ -11,12 +14,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SimpleAdaptiveSymbolPickingStrategyTest {
-    //TODO: implement
+
+    private SimpleAdaptiveSymbolPickingStrategy strategy;
+
+    @Before
+    public void setUp() {
+        RuleSet ruleSet = new CircularRPSRuleSet();
+        strategy = new SimpleAdaptiveSymbolPickingStrategy(ruleSet.getSymbols());
+    }
 
     @Test
     public void changesSymbolAfterPlayerWin() {
-        SimpleAdaptiveSymbolPickingStrategy strategy = new SimpleAdaptiveSymbolPickingStrategy();
-
         GameInfo mockGameInfo = mock(GameInfo.class);
         when(mockGameInfo.isFirstGame()).thenReturn(false);
         when(mockGameInfo.getGameOutcome()).thenReturn(GameOutcome.PLAYER_WIN);
@@ -36,8 +44,6 @@ public class SimpleAdaptiveSymbolPickingStrategyTest {
 
     @Test
     public void picksPlayersSymbolAfterPlayerLoss() {
-        SimpleAdaptiveSymbolPickingStrategy strategy = new SimpleAdaptiveSymbolPickingStrategy();
-
         GameInfo mockGameInfo = mock(GameInfo.class);
         when(mockGameInfo.isFirstGame()).thenReturn(false);
         when(mockGameInfo.getGameOutcome()).thenReturn(GameOutcome.PLAYER_LOSS);
@@ -57,8 +63,6 @@ public class SimpleAdaptiveSymbolPickingStrategyTest {
 
     @Test
     public void isItTimeToChangeStrategyReturnsTrueBeforeCrossingConsecutiveLossesThreshold() {
-        SimpleAdaptiveSymbolPickingStrategy strategy = new SimpleAdaptiveSymbolPickingStrategy();
-
         GameInfo mockGameInfo = mock(GameInfo.class);
         when(mockGameInfo.isFirstGame()).thenReturn(false);
         when(mockGameInfo.getGameOutcome()).thenReturn(GameOutcome.PLAYER_WIN);
@@ -73,8 +77,6 @@ public class SimpleAdaptiveSymbolPickingStrategyTest {
 
     @Test
     public void isItTimeToChangeStrategyReturnsTrueAfterCrossingConsecutiveLossesThreshold() {
-        SimpleAdaptiveSymbolPickingStrategy strategy = new SimpleAdaptiveSymbolPickingStrategy();
-
         GameInfo mockGameInfo = mock(GameInfo.class);
         when(mockGameInfo.isFirstGame()).thenReturn(false);
         when(mockGameInfo.getGameOutcome()).thenReturn(GameOutcome.PLAYER_WIN);
