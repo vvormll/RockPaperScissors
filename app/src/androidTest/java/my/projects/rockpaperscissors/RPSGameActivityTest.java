@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import my.projects.rockpaperscissors.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -60,8 +61,99 @@ public class RPSGameActivityTest {
                 .check(matches(allOf(isDisplayed(), not(withText(getString(R.string.none))))));
     }
 
+    // updateUI() tests
+
+    @Test
+    public void playerScoreGetsUpdatedByUpdateUI() {
+        final GameView gameView = gameActivityIntentsTestRule.getActivity();
+
+        onView(withId(R.id.playerScoreTextView)).check(matches(withText(getString(R.string.player_score, 0))));
+
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(1, 0, GameOutcome.PLAYER_WIN.toString(), Symbol.ROCK.name());
+            }
+        });
+
+        onView(withId(R.id.playerScoreTextView)).check(matches(withText(getString(R.string.player_score, 1))));
+    }
+
+    @Test
+    public void computerScoreGetsUpdatedByUpdateUI() {
+        final GameView gameView = gameActivityIntentsTestRule.getActivity();
+
+        onView(withId(R.id.computerScoreTextView)).check(matches(withText(getString(R.string.computer_score, 0))));
+
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(0, 1, GameOutcome.PLAYER_LOSS.toString(), Symbol.ROCK.name());
+            }
+        });
+
+        onView(withId(R.id.computerScoreTextView)).check(matches(withText(getString(R.string.computer_score, 1))));
+    }
+
+    @Test
+    public void computerChoiceGetsUpdatedByUpdateUI() {
+        final GameView gameView = gameActivityIntentsTestRule.getActivity();
+
+        onView(withId(R.id.computerActionTextView)).check(matches(withText(getString(R.string.none))));
+
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(0, 1, GameOutcome.PLAYER_LOSS.toString(), Symbol.ROCK.name());
+            }
+        });
+
+        onView(withId(R.id.computerActionTextView)).check(matches(withText(Symbol.ROCK.name())));
+    }
+
+    @Test
+    public void stateTextViewGetsUpdatedByUpdateUI() {
+        final GameView gameView = gameActivityIntentsTestRule.getActivity();
+
+        //start state
+        onView(withId(R.id.stateTextView)).check(matches(withText(getString(R.string.pick))));
+
+        //player loss state
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(0, 1, GameOutcome.PLAYER_LOSS.toString(), Symbol.ROCK.name());
+            }
+        });
+        onView(withId(R.id.stateTextView)).check(matches(withText(GameOutcome.PLAYER_LOSS.toString())));
+
+        //player win state
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(1, 1, GameOutcome.PLAYER_WIN.toString(), Symbol.ROCK.name());
+            }
+        });
+        onView(withId(R.id.stateTextView)).check(matches(withText(GameOutcome.PLAYER_WIN.toString())));
+
+        //draw state
+        gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.updateUI(1, 1, GameOutcome.DRAW.toString(), Symbol.ROCK.name());
+            }
+        });
+        onView(withId(R.id.stateTextView)).check(matches(withText(GameOutcome.DRAW.toString())));
+    }
+
+    //shortcut methods
+
     private String getString(int id) {
         return gameActivityIntentsTestRule.getActivity().getString(id);
+    }
+
+    private String getString(int id, Object... args) {
+        return gameActivityIntentsTestRule.getActivity().getString(id, args);
     }
 
 }
