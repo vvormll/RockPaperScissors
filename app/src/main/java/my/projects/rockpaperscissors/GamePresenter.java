@@ -89,8 +89,8 @@ public class GamePresenter {
     private void updateUI(GameInfo gameInfo) {
         int playerScore = gameInfo.getPlayerWins();
         int computerScore = gameInfo.getComputerWins();
-        String gameOutcome = (gameInfo.getGameOutcome() == null) ? "Pick" : gameInfo.getGameOutcome().toString();
-        String computerChoice = (gameInfo.getComputerChoice() == null) ? "None" : gameInfo.getComputerChoice().name();
+        String gameOutcome = (gameInfo.getGameOutcome() == null) ? gameView.getStringWithId(R.string.pick) : gameInfo.getGameOutcome().toString();
+        String computerChoice = (gameInfo.getComputerChoice() == null) ? gameView.getStringWithId(R.string.none) : gameInfo.getComputerChoice().name();
 
         gameView.updateUI(playerScore, computerScore, gameOutcome, computerChoice);
     }

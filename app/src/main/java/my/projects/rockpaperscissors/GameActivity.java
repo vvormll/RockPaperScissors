@@ -85,6 +85,11 @@ public class GameActivity extends Activity implements GameView {
     }
 
     @Override
+    public String getStringWithId(int resId) {
+        return getString(resId);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         gamePresenter.onAttachView(this);

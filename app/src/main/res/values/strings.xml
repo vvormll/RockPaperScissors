@@ -12,4 +12,5 @@
     <string name="start_game">Start game</string>
     <string name="rock_paper_scissors">Rock Paper Scissors</string>
     <string name="rock_paper_scissors_lizard_spock">Rock Paper Scissors Lizard Spock</string>
+    <string name="none">NONE</string>
 </resources>
