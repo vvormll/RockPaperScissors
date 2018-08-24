@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
-import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,34 +13,33 @@ import my.projects.rockpaperscissors.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.logic.symbol.Symbol;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
-public class RPSGameActivityTest {
+public class RPSLSGameActivityTest {
 
     @Rule
     public IntentsTestRule<GameActivity> gameActivityIntentsTestRule = new IntentsTestRule<GameActivity>(GameActivity.class) {
         @Override
         protected Intent getActivityIntent() {
             Intent intent = new Intent();
-            intent.putExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS);
+            intent.putExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS_LIZARD_SPOCK);
             return intent;
         }
     };
 
     @Test
-    public void showsRockPaperScissorsButtons() {
+    public void showsRockPaperScissorsLizardSpockButtons() {
         onView(allOf(instanceOf(Button.class), withText(Symbol.ROCK.name()))).check(matches(isDisplayed()));
         onView(allOf(instanceOf(Button.class), withText(Symbol.PAPER.name()))).check(matches(isDisplayed()));
         onView(allOf(instanceOf(Button.class), withText(Symbol.SCISSORS.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.LIZARD.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.SPOCK.name()))).check(matches(isDisplayed()));
     }
 
     // updateUI() tests
@@ -138,5 +136,4 @@ public class RPSGameActivityTest {
     private String getString(int id, Object... args) {
         return gameActivityIntentsTestRule.getActivity().getString(id, args);
     }
-
 }
