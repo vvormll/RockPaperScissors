@@ -26,7 +26,6 @@ public class GameActivity extends Activity implements GameView {
     private TextView computerActionTextView;
     private TextView stateTextView;
 
-    private HorizontalScrollView buttonsScrollView;
     private LinearLayout buttonsLinearLayout;
 
     @Override
@@ -42,7 +41,6 @@ public class GameActivity extends Activity implements GameView {
             gamePresenter.onRestoreState((GameInfo) savedInstanceState.getSerializable(GAME_INFO_KEY));
         }
 
-        buttonsScrollView = findViewById(R.id.buttonsScrollView);
         buttonsLinearLayout = findViewById(R.id.buttonLinearLayout);
 
         playerScoreTextView = findViewById(R.id.playerScoreTextView);
@@ -60,28 +58,34 @@ public class GameActivity extends Activity implements GameView {
     }
 
     @Override
-    public void initUI(List<String> symbolStrings) {
+    public void initUIButtons(List<String> symbolStrings) {
         buttonsLinearLayout.removeAllViews();
 
         int id = 0;
         for (String symbolString : symbolStrings) {
-            final Button button = new Button(this);
-
-            button.setId(id);
-            button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            button.setText(symbolString);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    gamePresenter.onPickedSymbol(Symbol.valueOf(button.getText().toString()));
-                }
-            });
+            Button button = buildSymbolButton(id, symbolString);
 
             buttonsLinearLayout.addView(button);
 
             id++;
         }
+    }
+
+    private Button buildSymbolButton(int id, String symbolString) {
+        final Button button = new Button(this);
+
+        button.setId(id);
+        button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        button.setText(symbolString);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gamePresenter.onPickedSymbol(Symbol.valueOf(button.getText().toString()));
+            }
+        });
+
+        return button;
     }
 
     @Override

@@ -36,6 +36,10 @@ public class GamePresenter {
         }
     }
 
+    public GamePresenter(GameController gameController) {
+        this.gameController = gameController;
+    }
+
     public void onAttachView(GameView gameView) {
         if (this.gameView != null) {
             throw new IllegalStateException("There already is an attached View");
@@ -64,23 +68,10 @@ public class GamePresenter {
             throw new IllegalStateException("View is not attached");
         }
 
-        gameView.initUI(getSymbolStringsListFromController());
+        gameView.initUIButtons(getSymbolStringsListFromController());
 
-        updateGameViewUI(gameController.getGameInfo());
-    }
-
-    public void onPickedSymbol(Symbol symbol) {
-        if (gameView == null) {
-            throw new IllegalStateException("View is not attached");
-        }
-
-        gameController.onPlayerInput(symbol);
-
-        updateGameViewUI(gameController.getGameInfo());
-    }
-
-    public void onQuitGame() {
-        gameController.clearInfo();
+        GameInfo gameInfo = getGameInfo();
+        gameView.updateUI(gameInfo.getPlayerWins(), gameInfo.getComputerWins(), getGameOutcomeString(gameInfo), getComputerChoiceString(gameInfo));
     }
 
     private List<String> getSymbolStringsListFromController() {
@@ -91,13 +82,26 @@ public class GamePresenter {
         return symbolStrings;
     }
 
-    private void updateGameViewUI(GameInfo gameInfo) {
-        int playerScore = gameInfo.getPlayerWins();
-        int computerScore = gameInfo.getComputerWins();
-        String gameOutcome = (gameInfo.getGameOutcome() == null) ? gameView.getStringWithId(R.string.pick) : gameInfo.getGameOutcome().toString();
-        String computerChoice = (gameInfo.getComputerChoice() == null) ? gameView.getStringWithId(R.string.none) : gameInfo.getComputerChoice().name();
+    public void onPickedSymbol(Symbol symbol) {
+        if (gameView == null) {
+            throw new IllegalStateException("View is not attached");
+        }
 
-        gameView.updateUI(playerScore, computerScore, gameOutcome, computerChoice);
+        gameController.onPlayerInput(symbol);
+
+        GameInfo gameInfo = getGameInfo();
+        gameView.updateUI(gameInfo.getPlayerWins(), gameInfo.getComputerWins(), getGameOutcomeString(gameInfo), getComputerChoiceString(gameInfo));
     }
 
+    private String getGameOutcomeString(GameInfo gameInfo) {
+        return (gameInfo.getGameOutcome() == null) ? gameView.getStringWithId(R.string.pick) : gameInfo.getGameOutcome().toString();
+    }
+
+    private String getComputerChoiceString(GameInfo gameInfo) {
+        return (gameInfo.getComputerChoice() == null) ? gameView.getStringWithId(R.string.none) : gameInfo.getComputerChoice().name();
+    }
+
+    public void onQuitGame() {
+        gameController.clearInfo();
+    }
 }
