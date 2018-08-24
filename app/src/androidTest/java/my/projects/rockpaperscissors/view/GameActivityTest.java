@@ -1,7 +1,8 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.view;
 
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
 
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
+import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 import my.projects.rockpaperscissors.view.GameActivity;
@@ -42,7 +44,7 @@ public class GameActivityTest {
 
     @Test
     public void showsScoreFields() {
-        onView(withId(R.id.playerScoreTextView)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.playerScoreTextView)).check(matches(isDisplayed()));
         onView(withId(R.id.computerScoreTextView)).check(matches(isDisplayed()));
     }
 

@@ -11,4 +11,5 @@ public interface GamePresenter {
     void onPickedSymbol(String symbolString);
     void onRestoreState(GameInfo gameInfo);
     GameInfo getGameInfo();
+    boolean isViewAttached();
 }

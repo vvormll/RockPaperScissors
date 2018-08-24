@@ -66,6 +66,11 @@ public class GamePresenterImpl implements GamePresenter {
     }
 
     @Override
+    public boolean isViewAttached() {
+        return gameView != null;
+    }
+
+    @Override
     public void onRestoreState(GameInfo gameInfo) {
         gameController.restoreState(gameInfo);
     }

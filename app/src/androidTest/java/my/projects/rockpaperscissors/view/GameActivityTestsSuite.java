@@ -1,4 +1,4 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.view;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

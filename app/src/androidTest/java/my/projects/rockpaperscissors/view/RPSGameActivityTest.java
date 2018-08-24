@@ -1,7 +1,8 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.view;
 
 import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
 
@@ -9,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.model.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
@@ -17,33 +19,34 @@ import my.projects.rockpaperscissors.view.GameView;
 import my.projects.rockpaperscissors.view.PickGameModeActivity;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
-public class RPSLSGameActivityTest {
+public class RPSGameActivityTest {
 
     @Rule
     public IntentsTestRule<GameActivity> gameActivityIntentsTestRule = new IntentsTestRule<GameActivity>(GameActivity.class) {
         @Override
         protected Intent getActivityIntent() {
             Intent intent = new Intent();
-            intent.putExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS_LIZARD_SPOCK);
+            intent.putExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS);
             return intent;
         }
     };
 
     @Test
-    public void showsRockPaperScissorsLizardSpockButtons() {
+    public void showsRockPaperScissorsButtons() {
         onView(allOf(instanceOf(Button.class), withText(Symbol.ROCK.name()))).check(matches(isDisplayed()));
         onView(allOf(instanceOf(Button.class), withText(Symbol.PAPER.name()))).check(matches(isDisplayed()));
         onView(allOf(instanceOf(Button.class), withText(Symbol.SCISSORS.name()))).check(matches(isDisplayed()));
-        onView(allOf(instanceOf(Button.class), withText(Symbol.LIZARD.name()))).check(matches(isDisplayed()));
-        onView(allOf(instanceOf(Button.class), withText(Symbol.SPOCK.name()))).check(matches(isDisplayed()));
     }
 
     // updateUI() tests
@@ -52,7 +55,7 @@ public class RPSLSGameActivityTest {
     public void playerScoreGetsUpdatedByUpdateUI() {
         final GameView gameView = gameActivityIntentsTestRule.getActivity();
 
-        onView(withId(R.id.playerScoreTextView)).check(matches(withText(getString(R.string.player_score, 0))));
+        onView(ViewMatchers.withId(R.id.playerScoreTextView)).check(matches(withText(getString(R.string.player_score, 0))));
 
         gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -140,4 +143,5 @@ public class RPSLSGameActivityTest {
     private String getString(int id, Object... args) {
         return gameActivityIntentsTestRule.getActivity().getString(id, args);
     }
+
 }

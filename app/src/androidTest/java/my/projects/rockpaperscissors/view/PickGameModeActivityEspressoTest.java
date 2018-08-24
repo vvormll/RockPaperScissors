@@ -1,12 +1,14 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.view;
 
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.view.PickGameModeActivity;
 
@@ -29,7 +31,7 @@ public class PickGameModeActivityEspressoTest {
 
     @Test
     public void showsGameModeButtons() {
-        onView(withId(R.id.rpsButton)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.rpsButton)).check(matches(isDisplayed()));
         onView(withId(R.id.rpslsButton)).check(matches(isDisplayed()));
     }
 

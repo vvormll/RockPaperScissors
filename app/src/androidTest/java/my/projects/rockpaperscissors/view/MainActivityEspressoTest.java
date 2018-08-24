@@ -1,12 +1,14 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.view;
 
 import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -28,7 +30,7 @@ public class MainActivityEspressoTest {
 
     @Test
     public void showsStartGameButtonOnStart() {
-        onView(withId(R.id.startButton)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.startButton)).check(matches(isDisplayed()));
     }
 
     @Test
