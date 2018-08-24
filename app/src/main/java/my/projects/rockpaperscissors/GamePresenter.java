@@ -44,6 +44,10 @@ public class GamePresenter {
     }
 
     public void onDetachView() {
+        if (gameView == null) {
+            throw new IllegalStateException("View is not attached");
+        }
+
         gameView = null;
     }
 
