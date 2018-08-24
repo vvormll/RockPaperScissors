@@ -64,8 +64,9 @@ public class GamePresenter {
             throw new IllegalStateException("View is not attached");
         }
 
-        initUIWithSymbols();
-        updateUI(gameController.getGameInfo());
+        gameView.initUI(getSymbolStringsListFromController());
+
+        updateGameViewUI(gameController.getGameInfo());
     }
 
     public void onPickedSymbol(Symbol symbol) {
@@ -74,23 +75,23 @@ public class GamePresenter {
         }
 
         gameController.onPlayerInput(symbol);
-        updateUI(gameController.getGameInfo());
+
+        updateGameViewUI(gameController.getGameInfo());
     }
 
     public void onQuitGame() {
         gameController.clearInfo();
     }
 
-    private void initUIWithSymbols() {
-        List<Symbol> symbols = gameController.getSymbols();
+    private List<String> getSymbolStringsListFromController() {
         List<String> symbolStrings = new ArrayList<>();
-        for (Symbol symbol : symbols) {
+        for (Symbol symbol : gameController.getSymbols()) {
             symbolStrings.add(symbol.name());
         }
-        gameView.initUI(symbolStrings);
+        return symbolStrings;
     }
 
-    private void updateUI(GameInfo gameInfo) {
+    private void updateGameViewUI(GameInfo gameInfo) {
         int playerScore = gameInfo.getPlayerWins();
         int computerScore = gameInfo.getComputerWins();
         String gameOutcome = (gameInfo.getGameOutcome() == null) ? gameView.getStringWithId(R.string.pick) : gameInfo.getGameOutcome().toString();
