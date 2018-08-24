@@ -1,9 +1,10 @@
-package my.projects.rockpaperscissors;
+package my.projects.rockpaperscissors.presenter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
+import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.presenter.GamePresenter;
 import my.projects.rockpaperscissors.presenter.GamePresenterImpl;
 import my.projects.rockpaperscissors.view.GameView;
