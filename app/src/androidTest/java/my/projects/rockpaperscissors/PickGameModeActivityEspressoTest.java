@@ -7,6 +7,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import my.projects.rockpaperscissors.model.GameMode;
+import my.projects.rockpaperscissors.view.PickGameModeActivity;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -34,13 +37,13 @@ public class PickGameModeActivityEspressoTest {
     public void clickOnRPSButtonSendIntentWithRPSGameMode() {
         onView(withId(R.id.rpsButton)).perform(click());
 
-        intended(allOf(hasComponent(hasShortClassName(".GameActivity")), hasExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS)));
+        intended(allOf(hasComponent(hasShortClassName(".view.GameActivity")), hasExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS)));
     }
 
     @Test
     public void clickOnRPSLSButtonSendIntentWithRPSLSGameMode() {
         onView(withId(R.id.rpslsButton)).perform(click());
 
-        intended(allOf(hasComponent(hasShortClassName(".GameActivity")), hasExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS_LIZARD_SPOCK)));
+        intended(allOf(hasComponent(hasShortClassName(".view.GameActivity")), hasExtra(PickGameModeActivity.GAME_MODE_KEY, GameMode.ROCK_PAPER_SCISSORS_LIZARD_SPOCK)));
     }
 }

@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
-import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import my.projects.rockpaperscissors.logic.game.GameOutcome;
-import my.projects.rockpaperscissors.logic.symbol.Symbol;
+import my.projects.rockpaperscissors.model.GameMode;
+import my.projects.rockpaperscissors.model.logic.game.GameOutcome;
+import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
+import my.projects.rockpaperscissors.view.GameActivity;
+import my.projects.rockpaperscissors.view.GameView;
+import my.projects.rockpaperscissors.view.PickGameModeActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

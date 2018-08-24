@@ -1,12 +1,13 @@
 package my.projects.rockpaperscissors;
 
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import my.projects.rockpaperscissors.view.MainActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -34,6 +35,6 @@ public class MainActivityEspressoTest {
     public void clickOnStartGameButtonStartsPickModeActivity() {
         onView(withId(R.id.startButton)).perform(click());
 
-        intended(hasComponent(hasShortClassName(".PickGameModeActivity")));
+        intended(hasComponent(hasShortClassName(".view.PickGameModeActivity")));
     }
 }
