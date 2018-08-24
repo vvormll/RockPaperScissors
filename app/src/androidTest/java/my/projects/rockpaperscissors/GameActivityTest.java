@@ -71,7 +71,7 @@ public class GameActivityTest {
         gameActivityIntentsTestRule.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                gameView.initUI(Arrays.asList("BUTTON", "OTHER_BUTTON"));
+                gameView.initUIButtons(Arrays.asList("BUTTON", "OTHER_BUTTON"));
             }
         });
 

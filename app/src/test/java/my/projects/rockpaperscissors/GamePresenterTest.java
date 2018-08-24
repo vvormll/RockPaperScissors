@@ -15,7 +15,7 @@ public class GamePresenterTest {
 
     @Before
     public void setUp() {
-        gamePresenter = new GamePresenter();
+        gamePresenter = new GamePresenterImpl();
         mockGameView = mock(GameView.class);
         gamePresenter.onAttachView(mockGameView);
 
@@ -27,7 +27,7 @@ public class GamePresenterTest {
     public void onStartedGameInitsGameViewUIWithSymbols() {
         gamePresenter.onStartedGame();
 
-        verify(mockGameView).initUI(ArgumentMatchers.<String>anyList());
+        verify(mockGameView).initUIButtons(ArgumentMatchers.<String>anyList());
     }
 
     @Test
