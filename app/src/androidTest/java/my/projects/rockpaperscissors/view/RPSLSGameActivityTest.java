@@ -1,14 +1,18 @@
 package my.projects.rockpaperscissors.view;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.Button;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeUnit;
 
 import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameMode;
@@ -26,6 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 
+@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RPSLSGameActivityTest {
 
@@ -131,6 +136,37 @@ public class RPSLSGameActivityTest {
             }
         });
         onView(withId(R.id.stateTextView)).check(matches(withText(GameOutcome.DRAW.toString())));
+    }
+
+
+    @Test
+    public void uiIsRestoredAfterConfigChange() {
+
+        gameActivityIntentsTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        onView(withId(R.id.playerScoreTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.computerScoreTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.computerActionTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.stateTextView)).check(matches(isDisplayed()));
+
+        onView(allOf(instanceOf(Button.class), withText(Symbol.ROCK.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.PAPER.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.SCISSORS.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.LIZARD.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.SPOCK.name()))).check(matches(isDisplayed()));
+
+        gameActivityIntentsTestRule.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        onView(withId(R.id.playerScoreTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.computerScoreTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.computerActionTextView)).check(matches(isDisplayed()));
+        onView(withId(R.id.stateTextView)).check(matches(isDisplayed()));
+
+        onView(allOf(instanceOf(Button.class), withText(Symbol.ROCK.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.PAPER.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.SCISSORS.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.LIZARD.name()))).check(matches(isDisplayed()));
+        onView(allOf(instanceOf(Button.class), withText(Symbol.SPOCK.name()))).check(matches(isDisplayed()));
     }
 
     //shortcut methods

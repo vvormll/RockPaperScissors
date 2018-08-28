@@ -10,14 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.model.info.GameInfo;
 import my.projects.rockpaperscissors.presenter.GamePresenter;
 import my.projects.rockpaperscissors.presenter.GamePresenterFactory;
-import my.projects.rockpaperscissors.presenter.GamePresenterImpl;
 
 public class GameActivity extends Activity implements GameView {
 
@@ -113,14 +111,7 @@ public class GameActivity extends Activity implements GameView {
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.getLogger(GameActivity.class.getName()).info("onResume");
         gamePresenter.onStartedGame();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Logger.getLogger(GameActivity.class.getName()).info("onPaues");
     }
 
     @Override

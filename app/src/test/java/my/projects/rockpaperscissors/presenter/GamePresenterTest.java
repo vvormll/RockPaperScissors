@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
 import my.projects.rockpaperscissors.R;
-import my.projects.rockpaperscissors.presenter.GamePresenter;
-import my.projects.rockpaperscissors.presenter.GamePresenterImpl;
 import my.projects.rockpaperscissors.view.GameView;
 
 import static org.mockito.Mockito.mock;

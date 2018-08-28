@@ -1,10 +1,8 @@
 package my.projects.rockpaperscissors.model.logic.rules;
 
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 

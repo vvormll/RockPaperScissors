@@ -1,6 +1,5 @@
 package my.projects.rockpaperscissors.model.info;
 
-
 import java.io.Serializable;
 
 import my.projects.rockpaperscissors.model.logic.game.GameOutcome;

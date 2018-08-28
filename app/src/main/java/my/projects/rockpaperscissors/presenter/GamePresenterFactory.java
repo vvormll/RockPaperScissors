@@ -1,7 +1,5 @@
 package my.projects.rockpaperscissors.presenter;
 
-import java.util.concurrent.TimeUnit;
-
 import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.model.info.GameInfo;
 import my.projects.rockpaperscissors.view.GameView;
@@ -37,6 +35,8 @@ public class GamePresenterFactory {
         public boolean onDetachViewCalled;
         public boolean onPickedSymbolCalled;
         public boolean onRestoreStateCalled;
+
+        private GameInfo mockGameInfo;
 
         @Override
         public void onStartedGame() {
@@ -76,12 +76,20 @@ public class GamePresenterFactory {
 
         @Override
         public GameInfo getGameInfo() {
-            return super.getGameInfo();
+            if (mockGameInfo == null) {
+                return super.getGameInfo();
+            } else {
+                return mockGameInfo;
+            }
         }
 
         @Override
         public boolean isViewAttached() {
             return super.isViewAttached();
+        }
+
+        public void setMockGameInfo(GameInfo gameInfo) {
+            this.mockGameInfo = gameInfo;
         }
     }
 
