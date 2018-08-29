@@ -20,7 +20,7 @@ public class GamePresenterImpl implements GamePresenter {
     private GameView gameView;
 
     public GamePresenterImpl() {
-        gameController = new GameController();
+        gameController = GameController.builder().build();
     }
 
     public GamePresenterImpl(GameMode gameMode) {
@@ -35,7 +35,7 @@ public class GamePresenterImpl implements GamePresenter {
                 gameController = new GameController(ruleSet, StrategyPickerBuilder.buildRandomSymbolPickingStrategyOnlyStrategyPicker(ruleSet.getSymbols()));
                 break;
             default:
-                gameController = new GameController();
+                throw new IllegalArgumentException("RuleSet for specified game mode is not defined");
         }
     }
 

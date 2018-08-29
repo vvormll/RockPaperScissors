@@ -19,23 +19,16 @@ public class GameController {
     private VictoryConditionChecker victoryConditionChecker;
     private RuleSet ruleSet;
 
-    public GameController() {
-        gameInfo = new GameInfo();
-        ruleSet = new CircularRPSRuleSet();
-        victoryConditionChecker = new VictoryConditionChecker(ruleSet);
-        strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols());
-        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
-    }
-
     public GameController(RuleSet ruleSet, StrategyPicker strategyPicker) {
-        gameInfo = new GameInfo();
         this.ruleSet = ruleSet;
-        victoryConditionChecker = new VictoryConditionChecker(ruleSet);
         this.strategyPicker = strategyPicker;
+
+        gameInfo = new GameInfo();
+        victoryConditionChecker = new VictoryConditionChecker(this.ruleSet);
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
     }
 
-    public GameController(GameInfo gameInfo, VictoryConditionChecker victoryConditionChecker, StrategyPicker strategyPicker, SymbolPicker symbolPicker, RuleSet ruleSet) {
+    private GameController(GameInfo gameInfo, VictoryConditionChecker victoryConditionChecker, StrategyPicker strategyPicker, SymbolPicker symbolPicker, RuleSet ruleSet) {
         this.gameInfo = gameInfo;
         this.victoryConditionChecker = victoryConditionChecker;
         this.strategyPicker = strategyPicker;
@@ -67,6 +60,62 @@ public class GameController {
 
     public List<Symbol> getSymbols() {
         return ruleSet.getSymbols();
+    }
+
+    public static GameControllerBuilder builder() {
+        return new GameControllerBuilder();
+    }
+
+    public static class GameControllerBuilder {
+        private GameInfo gameInfo;
+        private SymbolPicker symbolPicker;
+        private StrategyPicker strategyPicker;
+        private VictoryConditionChecker victoryConditionChecker;
+        private RuleSet ruleSet;
+
+        public GameControllerBuilder gameInfo(GameInfo gameInfo) {
+            this.gameInfo = gameInfo;
+            return this;
+        }
+
+        public GameControllerBuilder symbolPicker(SymbolPicker symbolPicker) {
+            this.symbolPicker = symbolPicker;
+            return this;
+        }
+
+        public GameControllerBuilder strategyPicker(StrategyPicker strategyPicker) {
+            this.strategyPicker = strategyPicker;
+            return this;
+        }
+
+        public GameControllerBuilder victoryConditionChecker(VictoryConditionChecker victoryConditionChecker) {
+            this.victoryConditionChecker = victoryConditionChecker;
+            return this;
+        }
+
+        public GameControllerBuilder ruleSet(RuleSet ruleSet) {
+            this.ruleSet = ruleSet;
+            return this;
+        }
+
+        public GameController build() {
+            if (gameInfo == null) {
+                gameInfo = new GameInfo();
+            }
+            if (ruleSet == null) {
+                ruleSet = new CircularRPSRuleSet();
+            }
+            if (strategyPicker == null) {
+                strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols());
+            }
+            if (symbolPicker == null) {
+                symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
+            }
+            if (victoryConditionChecker == null) {
+                victoryConditionChecker = new VictoryConditionChecker(ruleSet);
+            }
+            return new GameController(gameInfo, victoryConditionChecker, strategyPicker, symbolPicker, ruleSet);
+        }
     }
 
 }

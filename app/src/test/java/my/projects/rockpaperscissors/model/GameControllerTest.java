@@ -40,7 +40,13 @@ public class GameControllerTest {
         mockStrategyPicker = mock(StrategyPicker.class);
         mockRuleSet = mock(RuleSet.class);
 
-        gameController = new GameController(mockGameInfo, mockVictoryConditionChecker, mockStrategyPicker, mockSymbolPicker, mockRuleSet);
+        gameController = GameController.builder()
+                .gameInfo(mockGameInfo)
+                .victoryConditionChecker(mockVictoryConditionChecker)
+                .strategyPicker(mockStrategyPicker)
+                .symbolPicker(mockSymbolPicker)
+                .ruleSet(mockRuleSet)
+                .build();
 
     }
 
