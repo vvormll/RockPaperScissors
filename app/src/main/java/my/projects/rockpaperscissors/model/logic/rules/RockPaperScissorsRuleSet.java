@@ -8,10 +8,11 @@ import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 
 public abstract class RockPaperScissorsRuleSet implements RuleSet {
 
-    private List<Symbol> symbolSet = new LinkedList<>(Arrays.asList(Symbol.ROCK, Symbol.PAPER, Symbol.SCISSORS));
+    //effectively unmodifiable
+    private final List<Symbol> symbolSet = new LinkedList<>(Arrays.asList(Symbol.ROCK, Symbol.PAPER, Symbol.SCISSORS));
 
     @Override
     public List<Symbol> getSymbols() {
-        return new LinkedList<>(symbolSet);
+        return symbolSet;
     }
 }
