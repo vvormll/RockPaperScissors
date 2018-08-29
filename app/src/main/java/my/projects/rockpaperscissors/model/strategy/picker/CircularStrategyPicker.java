@@ -1,6 +1,6 @@
 package my.projects.rockpaperscissors.model.strategy.picker;
 
-import my.projects.rockpaperscissors.model.util.CircularIteratorBuilder;
+import my.projects.rockpaperscissors.model.util.CircularIterator;
 import my.projects.rockpaperscissors.model.strategy.SymbolPickingStrategy;
 
 import java.util.Collection;
@@ -12,7 +12,7 @@ public class CircularStrategyPicker implements StrategyPicker {
     private Iterator<SymbolPickingStrategy> circularIterator;
 
     public CircularStrategyPicker(Collection<SymbolPickingStrategy> strategies) {
-        circularIterator = CircularIteratorBuilder.buildCircularIterator(Collections.unmodifiableCollection(strategies));
+        circularIterator = CircularIterator.build(Collections.unmodifiableCollection(strategies));
     }
 
     @Override

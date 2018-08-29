@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import my.projects.rockpaperscissors.model.util.CircularIteratorBuilder;
+import my.projects.rockpaperscissors.model.util.CircularIterator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +28,7 @@ public class CircularIteratorBuilderTest {
 
     @Test
     public void circlesAroundCollection() {
-        Iterator<String> iterator = CircularIteratorBuilder.buildCircularIterator(list);
+        Iterator<String> iterator = CircularIterator.build(list);
 
         String s;
         assertEquals("This", iterator.next());
@@ -43,26 +43,26 @@ public class CircularIteratorBuilderTest {
 
     @Test(expected = NoSuchElementException.class)
     public void throwsExceptionOnEmptyCollection() {
-        Iterator<String> iterator = CircularIteratorBuilder.buildCircularIterator(Collections.<String>emptyList());
+        Iterator<String> iterator = CircularIterator.build(Collections.<String>emptyList());
         iterator.next();
     }
 
     @Test
     public void hasNextReturnsFalseOnEmptyCollection() {
-        Iterator<String> iterator = CircularIteratorBuilder.buildCircularIterator(Collections.<String>emptyList());
+        Iterator<String> iterator = CircularIterator.build(Collections.<String>emptyList());
         assertEquals(false, iterator.hasNext());
     }
 
     @Test
     public void hasNextReturnsTrueOnNonEmptyCollection() {
-        Iterator<String> iterator = CircularIteratorBuilder.buildCircularIterator(list);
+        Iterator<String> iterator = CircularIterator.build(list);
 
         assertEquals(true, iterator.hasNext());
     }
 
     @Test
     public void hasNextReturnsTrueAtTheEndOfCollection() {
-        Iterator<String> iterator = CircularIteratorBuilder.buildCircularIterator(list);
+        Iterator<String> iterator = CircularIterator.build(list);
 
         for (int i = 0; i < list.size(); i++) {
             iterator.next();

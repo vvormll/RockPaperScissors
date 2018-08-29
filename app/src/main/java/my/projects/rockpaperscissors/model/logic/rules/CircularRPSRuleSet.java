@@ -3,7 +3,7 @@ package my.projects.rockpaperscissors.model.logic.rules;
 import java.util.Iterator;
 import java.util.List;
 
-import my.projects.rockpaperscissors.model.util.CircularIteratorBuilder;
+import my.projects.rockpaperscissors.model.util.CircularIterator;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 
 public class CircularRPSRuleSet extends RockPaperScissorsRuleSet {
@@ -16,7 +16,7 @@ public class CircularRPSRuleSet extends RockPaperScissorsRuleSet {
 
         List<Symbol> symbols = getSymbols();
 
-        Iterator<Symbol> circularIterator = CircularIteratorBuilder.buildCircularIterator(symbols);
+        Iterator<Symbol> circularIterator = CircularIterator.build(symbols);
         Symbol prev, next;
 
         next = circularIterator.next();
