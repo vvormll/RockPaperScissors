@@ -19,6 +19,6 @@ public class StrategyPickerBuilder {
     }
 
     public static StrategyPicker buildRandomSymbolPickingStrategyOnlyStrategyPicker(List<Symbol> symbolSet) {
-        return new RandomSymbolStrategyOnlyStrategyPicker(symbolSet);
+        return new SingleStrategyPicker(new RandomSymbolPickingStrategy(symbolSet));
     }
 }
