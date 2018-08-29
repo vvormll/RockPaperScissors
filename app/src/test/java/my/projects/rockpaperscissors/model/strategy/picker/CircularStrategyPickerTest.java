@@ -26,16 +26,16 @@ public class CircularStrategyPickerTest {
         CircularStrategyPicker strategyPicker = new CircularStrategyPicker(strategyList);
 
         SymbolPickingStrategy strategy;
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(RandomSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(SimpleAdaptiveSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(RandomSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(SimpleAdaptiveSymbolPickingStrategy.class, strategy.getClass());
     }
 }

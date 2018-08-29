@@ -72,7 +72,7 @@ public class GameControllerTest {
         gameController.onPlayerInput(Symbol.ROCK);
 
         verify(mockSymbolPicker).shouldChangeStrategy();
-        verify(mockStrategyPicker).pickNextStrategy(ArgumentMatchers.<SymbolPickingStrategy>any());
+        verify(mockStrategyPicker).pickNextStrategy();
         verify(mockSymbolPicker).changeStrategy(ArgumentMatchers.<SymbolPickingStrategy>any());
     }
 

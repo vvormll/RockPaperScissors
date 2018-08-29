@@ -24,7 +24,7 @@ public class GameController {
         ruleSet = new CircularRPSRuleSet();
         victoryConditionChecker = new VictoryConditionChecker(ruleSet);
         strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols());
-        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
+        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
     }
 
     public GameController(RuleSet ruleSet, StrategyPicker strategyPicker) {
@@ -32,7 +32,7 @@ public class GameController {
         this.ruleSet = ruleSet;
         victoryConditionChecker = new VictoryConditionChecker(ruleSet);
         this.strategyPicker = strategyPicker;
-        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy(null));
+        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
     }
 
     public GameController(GameInfo gameInfo, VictoryConditionChecker victoryConditionChecker, StrategyPicker strategyPicker, SymbolPicker symbolPicker, RuleSet ruleSet) {
@@ -61,7 +61,7 @@ public class GameController {
         gameInfo.updateInfo(playerChoice, computerChoice, gameOutcome);
 
         if (symbolPicker.shouldChangeStrategy()) {
-            symbolPicker.changeStrategy(strategyPicker.pickNextStrategy(symbolPicker.getStrategy()));
+            symbolPicker.changeStrategy(strategyPicker.pickNextStrategy());
         }
     }
 

@@ -18,16 +18,16 @@ public class StrategyPickerBuilderTest {
         StrategyPicker strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols());
 
         SymbolPickingStrategy strategy;
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(RandomSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(SimpleAdaptiveSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(RandomSymbolPickingStrategy.class, strategy.getClass());
 
-        strategy = strategyPicker.pickNextStrategy(null);
+        strategy = strategyPicker.pickNextStrategy();
         assertEquals(SimpleAdaptiveSymbolPickingStrategy.class, strategy.getClass());
     }
 
@@ -38,7 +38,7 @@ public class StrategyPickerBuilderTest {
 
         SymbolPickingStrategy strategy;
         for (int i = 0; i < 3; i++) {
-            strategy = strategyPicker.pickNextStrategy(null);
+            strategy = strategyPicker.pickNextStrategy();
             assertEquals(RandomSymbolPickingStrategy.class, strategy.getClass());
         }
     }

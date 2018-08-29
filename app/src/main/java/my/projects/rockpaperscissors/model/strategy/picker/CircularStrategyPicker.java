@@ -16,7 +16,7 @@ public class CircularStrategyPicker implements StrategyPicker {
     }
 
     @Override
-    public SymbolPickingStrategy pickNextStrategy(SymbolPickingStrategy currentStrategy) {
+    public SymbolPickingStrategy pickNextStrategy() {
         return circularIterator.next();
     }
 
