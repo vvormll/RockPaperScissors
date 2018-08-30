@@ -6,11 +6,12 @@ import my.projects.rockpaperscissors.model.info.GameInfo;
 import my.projects.rockpaperscissors.model.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.model.logic.game.VictoryConditionChecker;
 import my.projects.rockpaperscissors.model.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.model.logic.rules.RockPaperScissorsRuleSet;
 import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 import my.projects.rockpaperscissors.model.logic.symbol.SymbolPicker;
 import my.projects.rockpaperscissors.model.strategy.picker.StrategyPicker;
-import my.projects.rockpaperscissors.model.strategy.picker.StrategyPickerBuilder;
+import my.projects.rockpaperscissors.model.strategy.picker.StrategyPickerFactory;
 
 public class GameController {
     private GameInfo gameInfo;
@@ -28,13 +29,7 @@ public class GameController {
         symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
     }
 
-    private GameController() {
-        gameInfo = new GameInfo();
-        ruleSet = new CircularRPSRuleSet();
-        strategyPicker = StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols());
-        symbolPicker = new SymbolPicker(strategyPicker.pickNextStrategy());
-        victoryConditionChecker = new VictoryConditionChecker(ruleSet);
-    }
+    private GameController() {}
 
     public GameInfo getGameInfo() {
         return gameInfo;
@@ -95,7 +90,18 @@ public class GameController {
         }
 
         public GameController build() {
+            if (anyOfFieldsIsNull()) {
+                throw new IllegalStateException("All of GameController fields must be initialized before building");
+            }
             return gameController;
+        }
+
+        private boolean anyOfFieldsIsNull() {
+            return gameController.gameInfo == null ||
+                    gameController.symbolPicker == null ||
+                    gameController.ruleSet == null ||
+                    gameController.strategyPicker == null ||
+                    gameController.victoryConditionChecker == null;
         }
     }
 

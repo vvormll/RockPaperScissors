@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import my.projects.rockpaperscissors.model.info.GameInfo;
+import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 
 public class RandomSymbolPickingStrategy implements SymbolPickingStrategy {
 
-    private List<Symbol> symbolList = new ArrayList<>();
+    private List<Symbol> symbolList;
 
     private int gameCount;
 
@@ -19,8 +20,8 @@ public class RandomSymbolPickingStrategy implements SymbolPickingStrategy {
 
     private int gameCountThreshold;
 
-    public RandomSymbolPickingStrategy(List<Symbol> symbolList) {
-        this.symbolList.addAll(symbolList);
+    public RandomSymbolPickingStrategy(RuleSet ruleSet) {
+        this.symbolList = ruleSet.getSymbols();
         gameCountThreshold = 3;
     }
 

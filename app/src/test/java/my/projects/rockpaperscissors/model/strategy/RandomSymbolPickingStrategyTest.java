@@ -16,7 +16,7 @@ public class RandomSymbolPickingStrategyTest {
     @Before
     public void setUp() {
         RuleSet ruleSet = new CircularRPSRuleSet();
-        strategy = new RandomSymbolPickingStrategy(ruleSet.getSymbols());
+        strategy = new RandomSymbolPickingStrategy(ruleSet);
     }
 
     @Test

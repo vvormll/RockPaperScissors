@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.projects.rockpaperscissors.model.GameMode;
+import my.projects.rockpaperscissors.model.logic.rules.RockPaperScissorsRuleSet;
 import my.projects.rockpaperscissors.view.GameView;
 import my.projects.rockpaperscissors.R;
 import my.projects.rockpaperscissors.model.GameController;
@@ -12,27 +13,23 @@ import my.projects.rockpaperscissors.model.logic.rules.CircularRPSRuleSet;
 import my.projects.rockpaperscissors.model.logic.rules.MapRPSLSRuleSet;
 import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
-import my.projects.rockpaperscissors.model.strategy.picker.StrategyPickerBuilder;
+import my.projects.rockpaperscissors.model.strategy.picker.StrategyPickerFactory;
 
 public class GamePresenterImpl implements GamePresenter {
 
     private GameController gameController;
     private GameView gameView;
 
-    public GamePresenterImpl() {
-        gameController = GameController.builder().build();
-    }
-
     public GamePresenterImpl(GameMode gameMode) {
         RuleSet ruleSet;
         switch (gameMode) {
             case ROCK_PAPER_SCISSORS:
                 ruleSet = new CircularRPSRuleSet();
-                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildDefaultCircularStrategyPicker(ruleSet.getSymbols()));
+                gameController = new GameController(ruleSet, StrategyPickerFactory.buildDefaultRPSCircularStrategyPicker((RockPaperScissorsRuleSet) ruleSet));
                 break;
             case ROCK_PAPER_SCISSORS_LIZARD_SPOCK:
                 ruleSet = new MapRPSLSRuleSet();
-                gameController = new GameController(ruleSet, StrategyPickerBuilder.buildRandomSymbolPickingStrategyOnlyStrategyPicker(ruleSet.getSymbols()));
+                gameController = new GameController(ruleSet, StrategyPickerFactory.buildRandomSymbolPickingStrategyOnlyStrategyPicker(ruleSet));
                 break;
             default:
                 throw new IllegalArgumentException("RuleSet for specified game mode is not defined");

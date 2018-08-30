@@ -5,8 +5,14 @@ import java.util.List;
 import java.util.Random;
 
 import my.projects.rockpaperscissors.model.info.GameInfo;
+import my.projects.rockpaperscissors.model.logic.rules.RockPaperScissorsRuleSet;
+import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 
+
+//symbol picking strategy which is an implementation of
+//https://www.youtube.com/watch?v=rudzYPHuewc
+//works only for rock-paper-scissors ruleset
 public class SimpleAdaptiveSymbolPickingStrategy implements SymbolPickingStrategy {
 
     private List<Symbol> symbolList;
@@ -17,8 +23,8 @@ public class SimpleAdaptiveSymbolPickingStrategy implements SymbolPickingStrateg
     private Random rnd = new Random();
     private Symbol nextSymbol;
 
-    public SimpleAdaptiveSymbolPickingStrategy(List<Symbol> symbolList)  {
-        this.symbolList = new ArrayList<>(symbolList);
+    public SimpleAdaptiveSymbolPickingStrategy(RockPaperScissorsRuleSet ruleSet)  {
+        this.symbolList = ruleSet.getSymbols();
         consecutiveLossesThreshold = 2;
     }
 

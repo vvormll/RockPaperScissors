@@ -6,6 +6,7 @@ import org.junit.Test;
 import my.projects.rockpaperscissors.model.info.GameInfo;
 import my.projects.rockpaperscissors.model.logic.game.GameOutcome;
 import my.projects.rockpaperscissors.model.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.model.logic.rules.RockPaperScissorsRuleSet;
 import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.logic.symbol.Symbol;
 
@@ -20,7 +21,7 @@ public class SimpleAdaptiveSymbolPickingStrategyTest {
     @Before
     public void setUp() {
         RuleSet ruleSet = new CircularRPSRuleSet();
-        strategy = new SimpleAdaptiveSymbolPickingStrategy(ruleSet.getSymbols());
+        strategy = new SimpleAdaptiveSymbolPickingStrategy((RockPaperScissorsRuleSet) ruleSet);
     }
 
     @Test

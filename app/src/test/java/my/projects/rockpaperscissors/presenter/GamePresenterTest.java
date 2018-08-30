@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
 import my.projects.rockpaperscissors.R;
+import my.projects.rockpaperscissors.model.GameMode;
 import my.projects.rockpaperscissors.view.GameView;
 
 import static org.mockito.Mockito.mock;
@@ -18,7 +19,7 @@ public class GamePresenterTest {
 
     @Before
     public void setUp() {
-        gamePresenter = new GamePresenterImpl();
+        gamePresenter = new GamePresenterImpl(GameMode.ROCK_PAPER_SCISSORS);
         mockGameView = mock(GameView.class);
         gamePresenter.onAttachView(mockGameView);
 

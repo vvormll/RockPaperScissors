@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import my.projects.rockpaperscissors.model.logic.rules.CircularRPSRuleSet;
+import my.projects.rockpaperscissors.model.logic.rules.RockPaperScissorsRuleSet;
 import my.projects.rockpaperscissors.model.logic.rules.RuleSet;
 import my.projects.rockpaperscissors.model.strategy.RandomSymbolPickingStrategy;
 import my.projects.rockpaperscissors.model.strategy.SimpleAdaptiveSymbolPickingStrategy;
@@ -20,8 +21,8 @@ public class CircularStrategyPickerTest {
         RuleSet ruleSet = new CircularRPSRuleSet();
 
         List<SymbolPickingStrategy> strategyList = new ArrayList<>();
-        strategyList.add(new RandomSymbolPickingStrategy(ruleSet.getSymbols()));
-        strategyList.add(new SimpleAdaptiveSymbolPickingStrategy(ruleSet.getSymbols()));
+        strategyList.add(new RandomSymbolPickingStrategy(ruleSet));
+        strategyList.add(new SimpleAdaptiveSymbolPickingStrategy((RockPaperScissorsRuleSet) ruleSet));
 
         CircularStrategyPicker strategyPicker = new CircularStrategyPicker(strategyList);
 

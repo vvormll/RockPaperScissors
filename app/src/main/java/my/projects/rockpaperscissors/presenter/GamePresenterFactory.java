@@ -12,17 +12,9 @@ public class GamePresenterFactory {
         GamePresenterFactory.isTestMode = isTestMode;
     }
 
-    public static GamePresenter buildGamePresenter() {
-        if (isTestMode) {
-            return new TestGamePresenterImpl();
-        } else {
-            return new GamePresenterImpl();
-        }
-    }
-
     public static GamePresenter buildGamePresenter(GameMode gameMode) {
         if (isTestMode) {
-            return new TestGamePresenterImpl();
+            return new TestGamePresenterImpl(gameMode);
         } else {
             return new GamePresenterImpl(gameMode);
         }
@@ -37,6 +29,10 @@ public class GamePresenterFactory {
         public boolean onRestoreStateCalled;
 
         private GameInfo mockGameInfo;
+
+        public TestGamePresenterImpl(GameMode gameMode) {
+            super(gameMode);
+        }
 
         @Override
         public void onStartedGame() {
